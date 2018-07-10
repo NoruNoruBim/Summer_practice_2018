@@ -5,16 +5,18 @@
 import requests
 from bs4 import BeautifulSoup
 
-#url_array = [ "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2010_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2006_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2002_FIFA_World_Cup" ]
+url_array = [ "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2010_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2006_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2002_FIFA_World_Cup" ]
 
 digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 symbols = ['(', ')', ',', '.']
-url_array = [ "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup" ]
+#url_array = [ "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup" ]
 list_of_teams = []
 tmp = []
 marker = 0
 
 for i in range(len(url_array)):
+
+	list_of_teams = []
 
 	request = requests.get(url_array[i])
 
@@ -22,7 +24,7 @@ for i in range(len(url_array)):
 	
 	main_information = soup.find('div', {'id' : 'bodyContent'})
 
-	with open("library.txt", "w", encoding = "utf8") as library:
+	with open("library.txt", "a", encoding = "utf8") as library:
 		library.write("          " + url_array[i] + "          \n")
 		library.write(main_information.text)
 
@@ -53,7 +55,7 @@ for i in range(len(url_array)):
 	
 	#print(main_information.text.split()[0 : 10])
 	#print(str(list_of_teams))
-	with open("list_of_teams.txt", "w", encoding = "utf8") as file:
+	with open("list_of_teams.txt", "a", encoding = "utf8") as file:
 		for team in list_of_teams:
 			file.write(team.strip() + '\n')
 

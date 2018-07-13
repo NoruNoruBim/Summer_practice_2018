@@ -60,7 +60,8 @@ for i in range(len(url_array)):
 				break
 	
 	
-	print(str(score))
+	
+	#print(str(score))
 	#print(main_information.text.split()[0 : 10])
 	#print(str(list_of_teams))
 	with open("list_of_teams.txt", "a", encoding = "utf8") as file:

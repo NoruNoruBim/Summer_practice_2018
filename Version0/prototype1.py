@@ -27,9 +27,6 @@ y_test = np.array(base[len(base) * 0.8 : , -1 : ]).ravel()
 ppn = Perceptron(n_iter = 30, eta0 = 0.1, random_state = 0)
 ppn.fit(X_train, y_train)
 
-
-'''print(ppn.predict(X_test))
-print(y_test)'''
 errors = ppn.predict(X_test) - y_test
 
 good = 0

@@ -42,7 +42,10 @@ def make_base(dict, text):
 	base = []
 	for trios in text[:-69]:#    last 90 percent
 		if trios[0] in dict.keys():
-			base += [dict[trios[0]][0] / float(dict[trios[0]][2])] + [dict[trios[0]][1] / float(dict[trios[0]][2])]
+			if float(dict[trios[0]][2]) != 0:
+				base += [dict[trios[0]][0] / float(dict[trios[0]][2])] + [dict[trios[0]][1] / float(dict[trios[0]][2])]
+			else:
+				base += [0] + [0]
 			
 			dict[trios[0]][0] += int(trios[1][0])
 			dict[trios[0]][1] += int(trios[1][2])
@@ -52,7 +55,10 @@ def make_base(dict, text):
 			dict.update({trios[0] : [int(trios[1][0]), int(trios[1][2]), 1]})
 			
 		if trios[2] in dict.keys():
-			base += [dict[trios[2]][0] / float(dict[trios[2]][2])] + [dict[trios[2]][1] / float(dict[trios[2]][2])]
+			if float(dict[trios[2]][2]) != 0:
+				base += [dict[trios[2]][0] / float(dict[trios[2]][2])] + [dict[trios[2]][1] / float(dict[trios[2]][2])]
+			else:
+				base += [0] + [0]
 
 			dict[trios[2]][0] += int(trios[1][2])
 			dict[trios[2]][1] += int(trios[1][0])
@@ -69,8 +75,10 @@ def make_base(dict, text):
 			base += [3]
 		
 	base = np.array(base).reshape(len(base) / 5, 5)
-	'''print(base)
-	print(base.shape)'''
+	#print(base)
+	print(base.shape)
+	#print(dict)
+	print(len(dict.keys()))
 	with open("base.txt", 'w') as file:
 		for i in range(len(base)):
 			for j in range(len(base[i])):

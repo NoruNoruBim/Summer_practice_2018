@@ -4,7 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-url_array = [ "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2010_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2006_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2002_FIFA_World_Cup" ]
+url_array = [ "https://en.wikipedia.org/wiki/2014_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2010_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2006_FIFA_World_Cup", "https://en.wikipedia.org/wiki/2002_FIFA_World_Cup", "https://en.wikipedia.org/wiki/1998_FIFA_World_Cup", "https://en.wikipedia.org/wiki/1994_FIFA_World_Cup", "https://en.wikipedia.org/wiki/1990_FIFA_World_Cup" ]
 
 digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 symbols = ['(', ')', ',', '.']
@@ -24,7 +24,7 @@ for i in range(len(url_array)):
 	
 	main_information = soup.find('div', {'id' : 'bodyContent'})
 
-	with open("library.txt", "w", encoding = "utf8") as library:
+	with open("library.txt", "a", encoding = "utf8") as library:
 		library.write("          " + url_array[i] + "          \n")
 		library.write(main_information.text)
 
@@ -75,7 +75,7 @@ for i in range(len(url_array)):
 			file.write(team.strip() + '\n')
 			
 			
-	print(score)
+	#print(score)
 	q = 1
 	with open("score.txt", "w", encoding = "utf8") as file:
 		for element in score:

@@ -193,9 +193,6 @@ plt.xlabel("Epoches")
 plt.tight_layout()
 plt.show() '''
 
-'''
-'''
-
 print("Do you want to use standatd test package or your?\nWrite `Standard` or `Russia2018`.")
 answer = str(input())
 if answer == "Standard":

@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.special import expit
 import sys
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 class NeuralNetMLP(object):
 	def __init__(self, n_output, n_features, n_hidden=30,
@@ -121,7 +121,7 @@ class NeuralNetMLP(object):
 			self.eta /= (1 + self.decrease_const * 1)
 			
 			if print_progress:
-				sys.stderr.write("\rEpoch: %d/%d\n" % (i + 1, self.epochs))
+				#sys.stderr.write("\rEpoch: %d/%d\n" % (i + 1, self.epochs))
 				sys.stderr.flush()
 			
 			if self.shuffle:
@@ -169,14 +169,7 @@ def get_base():
 base = get_base()
 
 X_train = np.array(base[ : len(base) * 0.8, : -1])
-#y_train = np.array(base[ : len(base) * 0.8, -1 : ])
-
 y_train = np.array([int(i) for i in base[ : len(base) * 0.8, -1 : ]])
-
-X_test = np.array(base[len(base) * 0.8 : , : -1])
-#y_test = np.array(base[len(base) * 0.8 : , -1 : ])
-y_test = np.array([int(i) for i in base[len(base) * 0.8 :, -1 : ]])
-
 
 nn = NeuralNetMLP(n_output = 10,
 				  n_features = X_train.shape[1],
@@ -192,14 +185,48 @@ nn = NeuralNetMLP(n_output = 10,
 				  random_state = 1)
 
 nn.fit(X_train, y_train, print_progress = True)
-
+'''
 plt.plot(range(len(nn.cost_)), nn.cost_)
 plt.ylim([0, 1500])
 plt.ylabel("Cost")
 plt.xlabel("Epoches")
 plt.tight_layout()
-plt.show() 
+plt.show() '''
 
-y_test_pred = nn.predict(X_test)
-acc = np.sum(y_test == y_test_pred, axis = 0) / X_test.shape[0]
-print("Bepнocть на тестовом наборе: %.2f%%" % (acc * 100))
+'''
+'''
+
+print("Do you want to use standatd test package or your?\nWrite `Standard` or `Russia2018`.\n")
+answer = str(input())
+if answer == "Standard":
+	X_test = np.array(base[len(base) * 0.8 : , : -1])
+	y_test = np.array([int(i) for i in base[len(base) * 0.8 :, -1 : ]])
+	
+	y_test_pred = nn.predict(X_test)
+	acc = np.sum(y_test == y_test_pred, axis = 0) / X_test.shape[0]
+	print("Accuracy is: %.2f%%" % (acc * 100))
+else:
+	X_test = []
+	X_test += [[1.], [1.666], [0.5454], [2.4545]] + [[1.5714], [1.], [0.], [1.]] + [[1.75], [1.], [1.1764], [1.]] + [[1.75], [1.2222], [2.0833], [1.2083]] + [[1.5], [1.2], [1.8], [1.]]
+	X_test = np.array(X_test).reshape(5, 4)
+	y_test = np.array([1, 1, 2, 1, 2])
+	names = ["Russia", "Saudi Arabia", "Egypt", "Uruguay", "Spain", "Croatia"]
+	#print(X_train)
+	y_test_pred = nn.predict(X_test)
+	print(y_test_pred)
+	
+	for i in range(len(y_test_pred)):
+		print(names[0] + ' - ' + names[i + 1] + '   ', end = '')
+		if y_test_pred[i] == 1:
+			print(" | Win first. ", end = '')
+		else:
+			print(" | Win second. ", end = '')
+		if y_test_pred[i] != y_test[i]:
+			print(" --- Wrong result ---")
+		else:
+			print(" --- Right result ---")
+	
+	
+	
+
+

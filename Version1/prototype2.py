@@ -196,7 +196,7 @@ plt.show() '''
 '''
 '''
 
-print("Do you want to use standatd test package or your?\nWrite `Standard` or `Russia2018`.\n")
+print("Do you want to use standatd test package or your?\nWrite `Standard` or `Russia2018`.")
 answer = str(input())
 if answer == "Standard":
 	X_test = np.array(base[len(base) * 0.8 : , : -1])
